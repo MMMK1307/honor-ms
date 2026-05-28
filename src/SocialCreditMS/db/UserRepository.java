@@ -4,6 +4,7 @@ import SocialCreditMS.Model.User;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -21,7 +22,13 @@ public class UserRepository implements BaseRepository<User> {
 
     @Override
     public ArrayList<User> getAll() {
-        return null;
+        ArrayList<User> users = new ArrayList<>();
+        var rawData = getRaw("users");
+        for (Iterator<String> it = rawData.keys(); it.hasNext(); ) {
+            var key = it.next();
+            users.add(User.createFromJson(rawData.getJSONObject(key)));
+        }
+        return users;
     }
 
     @Override

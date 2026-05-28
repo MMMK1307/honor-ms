@@ -17,6 +17,10 @@ public class Print {
         n(foreground.foreground() + str);
     }
 
+    public static void n(BColor foreground) {
+        n(foreground.foreground());
+    }
+
     public static void nl(String str) {
         PStream.println(str);
     }

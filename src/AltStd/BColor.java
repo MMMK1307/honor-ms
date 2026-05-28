@@ -1,6 +1,6 @@
 package AltStd;
 
-public record BColor(int r, int b, int g) {
+public record BColor(int r, int g, int b) {
     @Override
     public String toString() {
         return r+";"+g+";"+b;

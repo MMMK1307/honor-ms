@@ -1,5 +1,7 @@
 package AltStd.Altio;
 
+import AltStd.BColor;
+import AltStd.Colors;
 import AltStd.Result.Result;
 import AltStd.TryParse.TryParse;
 import AltStd.TryParse.ParseError;
@@ -40,7 +42,9 @@ public class Reader implements AutoCloseable {
     public int UntilInt(String inputMessage, String retryMessage, Function<Integer, Boolean> requirement) {
         Result<Integer, ParseError> input = Int(inputMessage);
         while(input.isErr() || !requirement.apply(input.get())) {
+            Print.n(Colors.Red);
             input = Int(retryMessage);
+            Print.n(Colors.Default);
         }
         return input.get();
     }

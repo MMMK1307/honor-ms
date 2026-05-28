@@ -1,23 +1,12 @@
-import AltStd.Altio.Print;
-import AltStd.Colors;
-import SocialCreditMS.Model.User;
-import SocialCreditMS.db.UserRepository;
+import SocialCreditMS.Controller.MainController;
 
-import java.util.UUID;
+import static SocialCreditMS.Util.CommonUI.printLogo;
 
 public class Main {
     public static void main(String[] args) {
-        Print.nl(Colors.Blue, "Azul");
-        Print.s(Colors.Red, "Vermelho", "Vermelho", "Vemelho\n");
-
-        UserRepository userRepo = new UserRepository();
-        User user = User.create("jonas", "Jonas Roberto", "senhasenha");
-        userRepo.save(user);
-
-        User user2 = userRepo.getById(user.getId());
-        Print.s(user2.getId().toString());
+        printLogo();
+        MainController.menu();
     }
-
 /*
     User
 
