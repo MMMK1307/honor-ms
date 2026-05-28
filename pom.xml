@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>mortgage-calculator</artifactId>
+    <artifactId>honor-ms</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Mortgage Calculator</name>
+    <name>Honor MS</name>
     <dependencies>
         <dependency>
             <groupId>org.json</groupId>
