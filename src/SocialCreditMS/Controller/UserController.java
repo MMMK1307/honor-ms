@@ -5,6 +5,8 @@ import SocialCreditMS.Util.ViewMessage;
 import SocialCreditMS.View.UserView;
 import SocialCreditMS.db.UserRepository;
 
+import java.util.UUID;
+
 public class UserController {
     private static UserRepository userRepo = new UserRepository();
 
@@ -12,14 +14,13 @@ public class UserController {
         UserView.menu();
     }
 
-    public static void createUser(String name, String login, String password, UserAccess access) {
+    public static ViewMessage createUser(String name, String login, String password, UserAccess access) {
         User user = User.create(name, login, password, access);
         boolean success = userRepo.save(user);
         if (success) {
-            UserView.menu(new ViewMessage(true, "Successfully created user"));
-        } else {
-            UserView.menu(new ViewMessage(true, "Error in user creation"));
+            return ViewMessage.Success("Successfully created user");
         }
+       return ViewMessage.Fail("Error in user creation");
     }
 
     public static void listUsers() {
@@ -27,6 +28,28 @@ public class UserController {
         UserView.listUsers(users);
     }
 
-    public static void editUser(User user) {
+    public static ViewMessage editUser(User user, String name, String login, UserAccess access) {
+        if(!name.isEmpty())
+            user.setName(name);
+        if(!login.isEmpty())
+            user.setLogin(login);
+        user.setAccess(access);
+        boolean editSuccess = userRepo.save(user);
+        if(editSuccess) {
+            return ViewMessage.Success("User was edited");
+        }
+        return ViewMessage.Fail("Error in Editing User");
+    }
+
+    public static ViewMessage removeUser(UUID userId) {
+        var user = userRepo.getById(userId);
+        if(user == null) {
+            return ViewMessage.Fail("User not Found");
+        }
+        boolean deleteSuccess = userRepo.delete(user);
+        if(deleteSuccess) {
+            return ViewMessage.Success("User was Deleted");
+        }
+        return ViewMessage.Fail("User not Found");
     }
 }

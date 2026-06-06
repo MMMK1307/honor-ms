@@ -5,9 +5,8 @@ import AltStd.Colors;
 
 public class CommonUI {
     public static void printLogo() {
-        Print.nl(Colors.Orange,"+-------------------------------------------+");
-        Print.n(Colors.Red, "|\t\t\t\tChina");
-        Print.nl(Colors.Yellow, " Honor-MS\t\t\t\t|");
-        Print.nl(Colors.Orange,"+-------------------------------------------+");
+        Print.n(Colors.Orange,"+-------------------------------------------+\n|");
+        Print.n(Colors.Yellow, "\t\t\t\tChina Honor-MS\t\t\t\t");
+        Print.nl(Colors.Orange,"|\n+-------------------------------------------+");
     }
 }

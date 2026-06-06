@@ -11,17 +11,26 @@ import java.util.function.Function;
 public interface BaseRepository<M extends BaseModel> {
     String dbBasePath = "./src/SocialCreditMS/db/data/";
 
+    private boolean saveTable(String tableName, JSONObject tableData) {
+        String path = dbBasePath + tableName;
+        return JsonHelper.writeJsonFile(path, tableData);
+    }
+
     default boolean save(M model) {
         JSONObject tableData = getRaw(model.getTableName());
         tableData.put(model.getId().toString(), model.toJson());
-        String path = dbBasePath + model.getTableName();
-        JsonHelper.writeJsonFile(path, tableData);
-        return true;
+        return saveTable(model.getTableName(), tableData);
     }
+
     default JSONObject getRaw(String tableName) {
         String path = dbBasePath + tableName;
-        JSONObject tableData = JsonHelper.readJsonFileOrEmpty(path);
-        return tableData;
+        return JsonHelper.readJsonFileOrEmpty(path);
+    }
+
+    default boolean delete(M model) {
+        JSONObject tableData = getRaw(model.getTableName());
+        tableData.remove(model.getId().toString());
+        return saveTable(model.getTableName(), tableData);
     }
 
     M getById(UUID id);

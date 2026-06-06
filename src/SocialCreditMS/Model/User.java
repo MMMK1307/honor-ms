@@ -47,15 +47,15 @@ public class User extends BaseModel {
         this.access = access;
     }
 
-    private String login;
     private String name;
+    private String login;
     private String password;
     private UserAccess access;
 
     public static User createFromJson(JSONObject jsonData) {
         return new ObjectMapper().readValue(jsonData.toString(), User.class);
     }
-    public static User create(String login, String name, String password, UserAccess access) {
+    public static User create(String name, String login, String password, UserAccess access) {
         var id = UUID.randomUUID();
         return new User(id, login, name, Hashing.createHash(password, id.toString()), access);
     }

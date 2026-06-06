@@ -33,6 +33,15 @@ public class UserRepository implements BaseRepository<User> {
 
     @Override
     public ArrayList<User> getBy(Function<User, Boolean> predicate) {
-        return null;
+        ArrayList<User> users = new ArrayList<>();
+        var rawData = getRaw("users");
+        for (Iterator<String> it = rawData.keys(); it.hasNext(); ) {
+            var key = it.next();
+            var tempUser = User.createFromJson(rawData.getJSONObject(key));
+            if(predicate.apply(tempUser)) {
+                users.add(tempUser);
+            }
+        }
+        return users;
     }
 }
