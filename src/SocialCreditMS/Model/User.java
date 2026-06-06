@@ -27,10 +27,6 @@ public class User extends BaseModel {
         return name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public UserAccess getAccess() {
         return access;
     }
@@ -55,8 +51,14 @@ public class User extends BaseModel {
     public static User createFromJson(JSONObject jsonData) {
         return new ObjectMapper().readValue(jsonData.toString(), User.class);
     }
+
     public static User create(String name, String login, String password, UserAccess access) {
-        var id = UUID.randomUUID();
+        UUID id = UUID.randomUUID();
         return new User(id, login, name, Hashing.createHash(password, id.toString()), access);
+    }
+
+    public boolean checkPassword(String rawPassword) {
+        String passwordHash = Hashing.createHash(rawPassword, getId().toString());
+        return password.equals(passwordHash);
     }
 }
