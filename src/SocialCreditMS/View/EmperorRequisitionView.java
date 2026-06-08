@@ -3,6 +3,7 @@ package SocialCreditMS.View;
 import AltStd.Altio.Print;
 import AltStd.Altio.Reader;
 import AltStd.Colors;
+import SocialCreditMS.Controller.CitizenController;
 import SocialCreditMS.Controller.EmperorRequisitionController;
 import SocialCreditMS.Model.Citizen;
 import SocialCreditMS.Model.EmperorRequisition;
@@ -44,7 +45,7 @@ public class EmperorRequisitionView {
         Print.nl(Colors.Blue, "\n-- Create Requisition for the Emperor --");
         String name = sc.String(" Name: ");
         String description = sc.String(" Description: ");
-        Citizen requester = null;
+        Citizen requester = CitizenController.getSingleByName();
         message = EmperorRequisitionController.create(name, description, requester);
     }
 
@@ -52,7 +53,7 @@ public class EmperorRequisitionView {
         Print.nl(Colors.Blue, "\n-- Edit Requisition for the Emperor --");
         String name = sc.String(" Name [" + requisition.getName() + "]: ");
         String description = sc.String(" Description: [" + requisition.getDescription() + "]: ");
-        Citizen requester = null;
+        Citizen requester = CitizenController.getSingleByName();
         message = EmperorRequisitionController.edit(requisition, name, description, requester);
     }
 
@@ -61,12 +62,12 @@ public class EmperorRequisitionView {
             Print.nl(Colors.Yellow, "\n--- NO REQUISITIONS ---");
             return;
         }
-        Print.nl(Colors.Blue, "\n---------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        Print.fl("| %-3s | | %-20s | | %-20s | | %-20s | | %-20s | | %-20s | | %-20s | |", "ID", "NAME", "DESC", "REQUESTER", "CREATION", "APPROVED", "RESPONSE");
-        Print.nl(Colors.Blue, "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        Print.nl(Colors.Blue, "\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        Print.fl("| %-3s | | %-20s | | %-40s | | %-20s | | %-20s | | %-20s | | %-20s | |", "ID", "NAME", "DESC", "REQUESTER", "CREATION", "APPROVED", "RESPONSE");
+        Print.nl(Colors.Blue, "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         for(int i = 0 ; i < requisitions.size(); i++) {
             var requisition = requisitions.get(i);
-            Print.fl("| %-3d | | %-20s | | %-20s | | %-20s | | %-20s | | %-20s | | %-20s | |",
+            Print.fl("| %-3d | | %-20s | | %-40s | | %-20s | | %-20s | | %-20s | | %-20s | |",
                     i + 1, requisition.getName(), requisition.getDescription(), requisition.getRequesterName(),
                     requisition.getFormattedCreatedAt(), requisition.isApproved() ? "YES" : "NO",
                     requisition.getEmperorResponse()

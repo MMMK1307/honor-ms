@@ -27,8 +27,6 @@ public class EmperorRequisition extends BaseModel {
 
     private String name;
 
-
-
     private String description;
 
     @JsonIgnore
@@ -70,6 +68,10 @@ public class EmperorRequisition extends BaseModel {
         return requester;
     }
 
+    public UUID getRequesterId() {
+        return _requester_id;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -99,6 +101,8 @@ public class EmperorRequisition extends BaseModel {
         this.requester = requester;
         if(requester != null) {
             this._requester_id = requester.getId();
+        } else {
+            this._requester_id = null;
         }
     }
 

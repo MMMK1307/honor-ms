@@ -1,7 +1,9 @@
 import SocialCreditMS.Controller.MainController;
+import SocialCreditMS.Model.Citizen;
 import SocialCreditMS.Model.User;
 import SocialCreditMS.Model.UserAccess;
 import SocialCreditMS.View.MainView;
+import SocialCreditMS.db.CitizenRepository;
 import SocialCreditMS.db.UserRepository;
 
 import static SocialCreditMS.Util.CommonUI.printLogo;
@@ -27,6 +29,13 @@ public class Main {
         if(basicUsers.isEmpty()) {
             User basicUser = User.create("Basic", "basic", "basic", UserAccess.Basic);
             userRepo.save(basicUser);
+        }
+
+        CitizenRepository citizenRepo = new CitizenRepository();
+        var citizens = citizenRepo.getBy(u -> u.getName().equals("basic"));
+        if(citizens.isEmpty()) {
+            var citizen = Citizen.create("basic");
+            citizenRepo.save(citizen);
         }
     }
 
