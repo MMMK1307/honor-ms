@@ -22,7 +22,7 @@ public class MainController {
         if(!passwordMatch) {
             return false;
         }
-        AppState.createState(user.getLogin(), user.getAccess());
+        AppState.setState(user.getLogin(), user.getAccess());
         return true;
     }
 }

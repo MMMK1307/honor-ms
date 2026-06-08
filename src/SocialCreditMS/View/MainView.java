@@ -3,13 +3,30 @@ package SocialCreditMS.View;
 import AltStd.Altio.Print;
 import AltStd.Altio.Reader;
 import AltStd.Colors;
+import SocialCreditMS.Controller.EmperorRequisitionController;
 import SocialCreditMS.Controller.MainController;
 import SocialCreditMS.Controller.UserController;
+import SocialCreditMS.Model.EmperorRequisition;
 import SocialCreditMS.Util.AppState;
 
 public class MainView {
     private static Reader sc = new Reader();
-    private static AppState state = AppState.getInstance();
+
+    public static void menuAdmin() {
+        int option = -1;
+        while(option != 0) {
+            Print.nl(Colors.BlueDark, "\n-- Admin Menu --");
+            Print.n(Colors.Default);
+            Print.nl("[1] Users");
+            option = sc.UntilInt("Option: ", "Invalid Option. Try again: ", (a) -> a >= 0 && a <= 5);
+
+            switch(option) {
+                case 1:
+                    UserController.menu();
+                    break;
+            }
+        }
+    }
 
     public static void menu() {
         int option = -1;
@@ -17,12 +34,32 @@ public class MainView {
         while(option != 0) {
             Print.nl(Colors.Blue, "\n-- Main Menu --");
             Print.n(Colors.Default);
-            Print.nl("[1] Users [0] Exit ");
-            option = sc.UntilInt("Option: ", "Invalid Option. Try again: ", (a) -> a >= 0 && a <= 5);
+
+            // Basic Access Actions
+            Print.n("[1] Citizens [8] Requisitions for the Emperor ");
+
+            // Admin Access Actions
+            if(AppState.hasAdminAccess()) {
+                Print.n("[9] Admin Menu ");
+            }
+
+            // Emperor Access Actions
+            if(AppState.hasEmperorAccess()) {
+                Print.n("[10] EmperorMenu ");
+            }
+
+            Print.nl("[0] Exit");
+
+            option = sc.UntilInt("Option: ", "Invalid Option. Try again: ", (a) -> a >= 0 && a <= 10);
 
             switch(option) {
                 case 1:
-                    UserController.menu();
+                    break;
+                case 8:
+                    EmperorRequisitionController.menu();
+                    break;
+                case 9:
+                    menuAdmin();
                     break;
             }
         }
@@ -35,10 +72,9 @@ public class MainView {
             String login = sc.String("Username/Login: ");
             String password = sc.String("Password: ");
             loginSuccess = MainController.login(login, password);
-            if(loginSuccess) {
-                break;
+            if(!loginSuccess) {
+                Print.nl(Colors.Red, "\nWrong login and/or password\n");
             }
-            Print.nl(Colors.Red, "\nWrong login and/or password\n");
         }
         Print.nl(Colors.Green, "\nLogged in!");
         menu();

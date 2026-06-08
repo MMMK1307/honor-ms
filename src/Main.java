@@ -16,8 +16,19 @@ public class Main {
             User adminUser = User.create("Admin", "admin", "admin", UserAccess.Admin);
             userRepo.save(adminUser);
         }
-    }
 
+        var emperorUsers = userRepo.getBy(u -> u.getLogin().equals("emp"));
+        if(emperorUsers.isEmpty()) {
+            User emperorUser = User.create("Emperor", "emp", "emp", UserAccess.Emperor);
+            userRepo.save(emperorUser);
+        }
+
+        var basicUsers = userRepo.getBy(u -> u.getLogin().equals("basic"));
+        if(basicUsers.isEmpty()) {
+            User basicUser = User.create("Basic", "basic", "basic", UserAccess.Basic);
+            userRepo.save(basicUser);
+        }
+    }
 
     public static void main(String[] args) {
         initDb();

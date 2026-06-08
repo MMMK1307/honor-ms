@@ -49,7 +49,10 @@ public class User extends BaseModel {
     private UserAccess access;
 
     public static User createFromJson(JSONObject jsonData) {
-        return new ObjectMapper().readValue(jsonData.toString(), User.class);
+        User mappedUser = new ObjectMapper().readValue(jsonData.toString(), User.class);
+        String access = jsonData.getString("access");
+        mappedUser.setAccess(UserAccess.valueOf(access));
+        return mappedUser;
     }
 
     public static User create(String name, String login, String password, UserAccess access) {

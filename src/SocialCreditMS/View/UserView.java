@@ -26,7 +26,7 @@ public class UserView {
         int option = -1;
         while (option != 0) {
             printMessage();
-            Print.nl(Colors.Blue, "\n-- User Menu -- ");
+            Print.nl(Colors.BlueDark, "\n-- User Menu -- ");
             Print.nl(Colors.Default, "[1] Create User [2]: List Users [0]: Exit");
             option = sc.UntilInt("Option: ", "Invalid Option. Try again: ", (x) -> x >= 0 && x <= 5);
             switch(option) {
@@ -45,7 +45,7 @@ public class UserView {
         String name = sc.String(" -- Name: ");
         String login = sc.String(" -- Login: ");
         String password = sc.String(" -- Password: ");
-        int ac = sc.UntilInt(" -- Access [1] Admin [0] Basic: ", "Invalid Access: ", (v) -> v == 0 || v == 1);
+        int ac = sc.UntilInt(" -- Access [1] Admin [2] Emperor [0] Basic: ", "Invalid Access: ", (v) -> v >= 0 && v <= 2 );
         message = UserController.createUser(name, login, password, UserAccess.values()[ac]);
     }
 
@@ -53,7 +53,7 @@ public class UserView {
         Print.nl(Colors.Blue, "\n-- Editing User --");
         String name = sc.String(" -- Name [" + user.getName() + "]: ");
         String login = sc.String(" -- Login [" + user.getLogin() + "]: ");
-        int ac = sc.UntilInt(" -- Access [1] Admin [0] Basic: ", "Invalid Access: ", (v) -> v == 0 || v == 1);
+        int ac = sc.UntilInt(" -- Access [1] Admin [2] Emperor [0] Basic: ", "Invalid Access: ", (v) -> v >= 0 && v <= 2 );
         message = UserController.editUser(user, name, login, UserAccess.values()[ac]);
     }
 
