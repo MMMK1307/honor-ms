@@ -53,6 +53,20 @@ public class EmperorRequisitionController {
             return ViewMessage.Success("Requisition was Updated");
         }
         return ViewMessage.Fail("Failed in saving changes");
+    }
 
+    public static void listResponses() {
+        var requisitions = erRepo.getBy((r) -> r.getEmperorResponse().isEmpty());
+        EmperorRequisitionView.listResponses(requisitions);
+    }
+
+    public static ViewMessage answer(EmperorRequisition requisition, boolean approved, String response) {
+        requisition.setApproved(approved);
+        requisition.setEmperorResponse(response);
+        boolean editSuccess = erRepo.save(requisition);
+        if(editSuccess) {
+            return ViewMessage.Success("Requisition was answered");
+        }
+        return ViewMessage.Fail("Failed in saving changes");
     }
 }

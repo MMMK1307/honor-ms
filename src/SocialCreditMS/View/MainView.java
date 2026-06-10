@@ -28,6 +28,21 @@ public class MainView {
         }
     }
 
+    public static void menuEmperor() {
+        int option = -1;
+        while(option != 0) {
+            Print.nl(Colors.Yellow, "\n-- Emperor Menu --");
+            Print.n(Colors.Default);
+            Print.nl("[1] Requisitions [2] Messages [0] Exit");
+            option = sc.UntilInt("Option: ", "Invalid Option. Try again: ", (a) -> a >= 0 && a <= 5);
+            switch(option) {
+                case 1:
+                    EmperorRequisitionController.listResponses();
+                    break;
+            }
+        }
+    }
+
     public static void menu() {
         int option = -1;
 
@@ -60,6 +75,9 @@ public class MainView {
                     break;
                 case 9:
                     menuAdmin();
+                    break;
+                case 10:
+                    menuEmperor();
                     break;
             }
         }

@@ -57,6 +57,58 @@ public class EmperorRequisitionView {
         message = EmperorRequisitionController.edit(requisition, name, description, requester);
     }
 
+    public static void answer(EmperorRequisition requisition) {
+        Print.nl(Colors.Yellow, "\n-- Answering Requisition --");
+        String approvedStr = sc.String("Approved[y/n]: ");
+        boolean approved = approvedStr.equals("y") || approvedStr.equals("Y");
+        String response = sc.String("Response: ");
+        message = EmperorRequisitionController.answer(requisition, approved, response);
+    }
+
+    public static void listResponses(ArrayList<EmperorRequisition> requisitions) {
+        if(requisitions.isEmpty()) {
+            Print.nl(Colors.Green, "\n--- NO PENDING REQUISITIONS ---");
+            return;
+        }
+        Print.nl(Colors.Yellow, "\n--------------------------------------------------------------------------------------------------------------------------------");
+        Print.fl("| %-3s | | %-20s | | %-40s | | %-20s | | %-20s |", "ID", "NAME", "DESC", "REQUESTER", "CREATION");
+        Print.nl(Colors.Yellow, "--------------------------------------------------------------------------------------------------------------------------------");
+
+        for(int i = 0 ; i < requisitions.size(); i++) {
+            var requisition = requisitions.get(i);
+            Print.fl("| %-3d | | %-20s | | %-40s | | %-20s | | %-20s |",
+                    i + 1, requisition.getName(), requisition.getDescription(),
+                    requisition.getRequesterName(), requisition.getFormattedCreatedAt()
+            );
+        }
+
+        Print.n(Colors.Default);
+        Print.nl("\n[1] Answer [2] Delete [0] Exit");
+        var option = sc.UntilInt("Option: ", "Invalid Option. Try Again: ", (x) -> x >= 0 && x < 3);
+
+        if(option == 0) {
+            return;
+        }
+        var requisitionId = sc.UntilInt("Id/Position: ", "Invalid Id/Position. Try Again: ", (x) -> x >= 0 && x <= requisitions.size());
+        requisitionId--;
+
+        if(requisitionId < 0) {
+            return;
+        }
+
+        var requisition = requisitions.get(requisitionId);
+
+        switch(option) {
+            case 1:
+                answer(requisition);
+                break;
+            case 2:
+                message = EmperorRequisitionController.delete(requisition.getId());
+                break;
+        }
+    }
+
+
     public static void list(ArrayList<EmperorRequisition> requisitions) {
         if(requisitions.isEmpty()) {
             Print.nl(Colors.Yellow, "\n--- NO REQUISITIONS ---");
@@ -81,6 +133,7 @@ public class EmperorRequisitionView {
         if(option == 0) {
             return;
         }
+
         var requisitionId = sc.UntilInt("Id/Position: ", "Invalid Id/Position. Try Again: ", (x) -> x >= 0 && x <= requisitions.size());
         requisitionId--;
 
