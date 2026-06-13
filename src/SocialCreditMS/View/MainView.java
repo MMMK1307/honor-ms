@@ -8,7 +8,7 @@ import SocialCreditMS.Controller.MainController;
 import SocialCreditMS.Controller.UserController;
 import SocialCreditMS.Model.EmperorRequisition;
 import SocialCreditMS.Util.AppState;
-
+import SocialCreditMS.Controller.ServiceController;
 public class MainView {
     private static Reader sc = new Reader();
 
@@ -51,7 +51,7 @@ public class MainView {
             Print.n(Colors.Default);
 
             // Basic Access Actions
-            Print.n("[1] Citizens [8] Requisitions for the Emperor ");
+            Print.n("[1] Citizens [2] Services [8] Requisitions for the Emperor ");
 
             // Admin Access Actions
             if(AppState.hasAdminAccess()) {
@@ -69,6 +69,10 @@ public class MainView {
 
             switch(option) {
                 case 1:
+                    break;
+
+                case 2:
+                    ServiceController.menu();
                     break;
                 case 8:
                     EmperorRequisitionController.menu();

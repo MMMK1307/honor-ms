@@ -23,7 +23,21 @@ public class ServiceRepository implements BaseRepository<Service> {
 
     @Override
     public ArrayList<Service> getAll() {
-        return null;
+        var tableData = getRaw("service");
+
+        ArrayList<Service> services = new ArrayList<>();
+
+        for (Iterator<String> it = tableData.keys(); it.hasNext();) {
+            var key = it.next();
+
+            services.add(
+                    Service.createFromJson(
+                            tableData.getJSONObject(key)
+                    )
+            );
+        }
+
+        return services;
     }
 
     @Override

@@ -20,4 +20,23 @@ public class ServiceController {
                 (s) -> s.getName().contains(name)
         );
     }
+    public static void listAll() {
+        var services = serviceRepo.getAll();
+
+        ServiceView.getBy(services);
+    }
+    public static void createService() {
+        Service service = ServiceView.create();
+
+        boolean success = serviceRepo.save(service);
+
+        if(success) {
+            System.out.println("Service created successfully!");
+        } else {
+            System.out.println("Failed to create service.");
+        }
+    }
+    public static void menu() {
+        ServiceView.menu();
+    }
 }
