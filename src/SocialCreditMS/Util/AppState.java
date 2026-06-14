@@ -26,6 +26,11 @@ public class AppState {
         state.access = access;
     }
 
+    public static UserAccess getState() {
+        var state = getInstance();
+        return state.access;
+    }
+
     public static boolean hasAdminAccess() {
         var state = getInstance();
         return state.access == UserAccess.Admin || state.access == UserAccess.Emperor;

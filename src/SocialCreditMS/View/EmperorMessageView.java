@@ -114,4 +114,14 @@ public class EmperorMessageView {
                 break;
         }
     }
+
+    public static void showMessages(ArrayList<EmperorMessage> messages) {
+        Print.nl(Colors.Yellow, "\n## Messages from the Emperor ##");
+        for(var message : messages) {
+            Print.nl(Colors.Red, "\n---------------------------------------------------------------");
+            Print.fl("| %s\n", message.getTitle());
+            Print.f(Colors.Orange," %s \n\n Date: %-55s", message.getBody(), message.getFormattedCreatedAt());
+            Print.nl(Colors.Red, "|\n---------------------------------------------------------------");
+        }
+    }
 }

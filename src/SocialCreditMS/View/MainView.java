@@ -101,6 +101,7 @@ public class MainView {
             }
         }
         Print.nl(Colors.Green, "\nLogged in!");
+        EmperorMessageController.getGroupMessages(AppState.getState());
         menu();
     }
 }

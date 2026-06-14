@@ -56,4 +56,12 @@ public class EmperorMessageController {
         }
         return ViewMessage.Fail("Error in Deleting Message");
     }
+
+    public static void getGroupMessages(UserAccess group) {
+        var messages = empMessageRepo.getBy(
+                m -> (m.getTargetGroup() == group || m.getTargetGroup() == UserAccess.All)
+                && m.getActive()
+        );
+        EmperorMessageView.showMessages(messages);
+    }
 }
