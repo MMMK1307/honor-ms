@@ -52,7 +52,7 @@ public class MainView {
             Print.n(Colors.Default);
 
             // Basic Access Actions
-            Print.n("[1] Citizens [2] Services [8] Requisitions for the Emperor ");
+            Print.n("[1] Citizens [2] Services [3] Delations [8] Requisitions for the Emperor ");
 
             // Admin Access Actions
             if(AppState.hasAdminAccess()) {
@@ -71,10 +71,11 @@ public class MainView {
             switch(option) {
                 case 1:
                     break;
-
                 case 2:
                     ServiceController.menu();
                     break;
+                case 3:
+                    DelationView.menu();
                 case 8:
                     EmperorRequisitionController.menu();
                     break;
