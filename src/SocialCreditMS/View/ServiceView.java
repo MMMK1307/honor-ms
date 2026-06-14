@@ -13,6 +13,12 @@ public class ServiceView {
     public static Service getByName() {
         String name = sc.String(" Service Name: ");
         var services = ServiceController.getByName(name);
+        if(services.isEmpty()) {
+            System.out.println(
+                    "No services found."
+            );
+            return null;
+        }
         return getBy(services);
     }
 
@@ -91,11 +97,13 @@ public class ServiceView {
             Print.nl("[1] Create Service");
             Print.nl("[2] Search Service");
             Print.nl("[3] List All Services");
+            Print.nl("[4] Activate/Deactivate Service");
+            Print.nl("[5] Use Service");
             Print.nl("[0] Exit");
             option = sc.UntilInt(
                     "Option: ",
                     "Invalid Option. Try again: ",
-                    (i) -> i >= 0 && i <= 3
+                    (i) -> i >= 0 && i <= 5
             );
 
             switch(option) {
@@ -109,7 +117,15 @@ public class ServiceView {
                 case 3:
                     ServiceController.listAll();
                     break;
+                case 4:
+                    ServiceController.toggleService();
+                    break;
+
+                case 5:
+                    ServiceController.useService();
+                    break;
             }
+
         }
     }
 }

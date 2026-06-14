@@ -23,7 +23,9 @@ public class Service extends BaseModel {
         this.cost = cost;
         this.active = active;
     }
-
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     private String name;
     private int requiredCredit;
     private double cost;
