@@ -2,6 +2,7 @@ package SocialCreditMS.db;
 
 import SocialCreditMS.Model.Citizen;
 import SocialCreditMS.Model.EmperorRequisition;
+import SocialCreditMS.Util.TableNames;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class EmperorRequisitionRepository implements BaseRepository<EmperorRequi
 
     @Override
     public EmperorRequisition getById(UUID id) {
-        var tableData = getRaw("emperor_requisition");
+        var tableData = getRaw(TableNames.EmperorMessage);
         var citizenTableData = getRaw("citizen");
         JSONObject userData = tableData.getJSONObject(id.toString());
         if(userData == null) {
@@ -40,7 +41,7 @@ public class EmperorRequisitionRepository implements BaseRepository<EmperorRequi
     @Override
     public ArrayList<EmperorRequisition> getAll() {
         ArrayList<EmperorRequisition> requisitions = new ArrayList<>();
-        var rawData = getRaw("emperor_requisition");
+        var rawData = getRaw(TableNames.EmperorMessage);
         var citizenTableData = getRaw("citizen");
         for (Iterator<String> it = rawData.keys(); it.hasNext(); ) {
             var key = it.next();
@@ -54,7 +55,7 @@ public class EmperorRequisitionRepository implements BaseRepository<EmperorRequi
     @Override
     public ArrayList<EmperorRequisition> getBy(Function<EmperorRequisition, Boolean> predicate) {
         ArrayList<EmperorRequisition> requisitions = new ArrayList<>();
-        var rawData = getRaw("emperor_requisition");
+        var rawData = getRaw(TableNames.EmperorMessage);
         var citizenTableData = getRaw("citizen");
         for (Iterator<String> it = rawData.keys(); it.hasNext(); ) {
             var key = it.next();

@@ -1,6 +1,7 @@
 package SocialCreditMS.Model;
 
 import SocialCreditMS.Util.Hashing;
+import SocialCreditMS.Util.TableNames;
 import org.json.JSONObject;
 import tools.jackson.databind.ObjectMapper;
 
@@ -12,7 +13,7 @@ public class User extends BaseModel {
     private User() {}
 
     private User(UUID id, String login, String name, String password, UserAccess access) {
-        super(id, "users");
+        super(id, TableNames.User);
         this.login = login;
         this.name = name;
         this.password = password;

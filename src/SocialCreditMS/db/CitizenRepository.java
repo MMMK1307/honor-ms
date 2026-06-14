@@ -1,6 +1,7 @@
 package SocialCreditMS.db;
 
 import SocialCreditMS.Model.Citizen;
+import SocialCreditMS.Util.TableNames;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.function.Function;
 public class CitizenRepository implements BaseRepository<Citizen> {
     @Override
     public Citizen getById(UUID id) {
-        var tableData = getRaw("citizen");
+        var tableData = getRaw(TableNames.Citizen);
         JSONObject citizenData = tableData.getJSONObject(id.toString());
         if(citizenData == null) {
             return null;
@@ -26,7 +27,7 @@ public class CitizenRepository implements BaseRepository<Citizen> {
 
     @Override
     public ArrayList<Citizen> getBy(Function<Citizen, Boolean> predicate) {
-        var tableData = getRaw("citizen");
+        var tableData = getRaw(TableNames.Citizen);
         ArrayList<Citizen> citizens = new ArrayList();
         for (Iterator<String> it = tableData.keys(); it.hasNext(); ) {
             var key = it.next();

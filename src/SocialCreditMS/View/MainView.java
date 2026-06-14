@@ -3,12 +3,10 @@ package SocialCreditMS.View;
 import AltStd.Altio.Print;
 import AltStd.Altio.Reader;
 import AltStd.Colors;
-import SocialCreditMS.Controller.EmperorRequisitionController;
-import SocialCreditMS.Controller.MainController;
-import SocialCreditMS.Controller.UserController;
+import SocialCreditMS.Controller.*;
 import SocialCreditMS.Model.EmperorRequisition;
 import SocialCreditMS.Util.AppState;
-import SocialCreditMS.Controller.ServiceController;
+
 public class MainView {
     private static Reader sc = new Reader();
 
@@ -38,6 +36,9 @@ public class MainView {
             switch(option) {
                 case 1:
                     EmperorRequisitionController.listResponses();
+                    break;
+                case 2:
+                    EmperorMessageController.menu();
                     break;
             }
         }

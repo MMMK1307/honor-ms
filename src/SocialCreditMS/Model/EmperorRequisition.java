@@ -1,5 +1,6 @@
 package SocialCreditMS.Model;
 
+import SocialCreditMS.Util.TableNames;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.json.JSONObject;
 import tools.jackson.databind.ObjectMapper;
@@ -13,7 +14,7 @@ public class EmperorRequisition extends BaseModel {
     private EmperorRequisition() {}
 
     private EmperorRequisition(UUID id, String name, String description, Citizen requester, LocalDateTime createdAt, boolean approved, String emperorResponse) {
-        super(id, "emperor_requisition");
+        super(id, TableNames.EmperorRequisition);
         this.name = name;
         this.description = description;
         this.requester = requester;

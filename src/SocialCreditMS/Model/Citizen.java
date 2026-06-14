@@ -1,5 +1,6 @@
 package SocialCreditMS.Model;
 
+import SocialCreditMS.Util.TableNames;
 import org.json.JSONObject;
 import tools.jackson.databind.ObjectMapper;
 
@@ -10,7 +11,7 @@ public class Citizen extends BaseModel {
     public Citizen() {}
 
     public Citizen(UUID id, String name) {
-        super(id, "citizen");
+        super(id, TableNames.Citizen);
         this.name = name;
     }
 
