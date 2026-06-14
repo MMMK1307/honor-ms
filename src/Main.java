@@ -1,5 +1,6 @@
 import SocialCreditMS.Controller.MainController;
 import SocialCreditMS.Model.Citizen;
+import SocialCreditMS.Model.Profession;
 import SocialCreditMS.Model.User;
 import SocialCreditMS.Model.UserAccess;
 import SocialCreditMS.View.MainView;
@@ -34,7 +35,7 @@ public class Main {
         CitizenRepository citizenRepo = new CitizenRepository();
         var citizens = citizenRepo.getBy(u -> u.getName().equals("basic"));
         if(citizens.isEmpty()) {
-            var citizen = Citizen.create("basic");
+            var citizen = Citizen.create("basic", new Profession("Worker"));
             citizenRepo.save(citizen);
         }
     }

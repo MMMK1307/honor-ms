@@ -70,6 +70,7 @@ public class MainView {
 
             switch(option) {
                 case 1:
+                    CitizenController.menu();
                     break;
                 case 2:
                     ServiceController.menu();

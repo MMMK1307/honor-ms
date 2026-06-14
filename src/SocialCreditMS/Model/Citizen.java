@@ -10,15 +10,18 @@ public class Citizen extends BaseModel {
 
     public Citizen() {}
 
-    public Citizen(UUID id, String name) {
+    public Citizen(UUID id, String name, Profession profession) {
         super(id, TableNames.Citizen);
         this.name = name;
+        this.profession = profession;
     }
 
     private String name;
+    private Profession profession;
 
-    public static Citizen create(String name) {
-        return new Citizen(UUID.randomUUID(), name);
+    public static Citizen create(String name, Profession profession) {
+
+        return new Citizen(UUID.randomUUID(), name, profession);
     }
 
     public static Citizen createFromJson(JSONObject jsonData) {
@@ -27,5 +30,9 @@ public class Citizen extends BaseModel {
 
     public String getName() {
         return name;
+    }
+
+    public Profession getProfession() {
+        return profession;
     }
 }

@@ -30,4 +30,44 @@ public class CitizenView {
         }
         return citizens.get(position);
     }
+    public static Citizen create() {
+        String name = sc.String("Citizen Name: ");
+
+        String professionName = sc.String("Profession Name: ");
+
+        return Citizen.create(
+                name,
+                new SocialCreditMS.Model.Profession(professionName)
+        );
+    }
+    public static void menu() {
+        int option = -1;
+
+        while(option != 0) {
+            Print.nl("[1] Create Citizen");
+            Print.nl("[2] Search Citizen");
+            Print.nl("[3] List All Citizens");
+            Print.nl("[0] Exit");
+
+            option = sc.UntilInt(
+                    "Option: ",
+                    "Invalid Option. Try again: ",
+                    (i) -> i >= 0 && i <= 3
+            );
+
+            switch(option) {
+                case 1:
+                    CitizenController.createCitizen();
+                    break;
+
+                case 2:
+                    getByName();
+                    break;
+
+                case 3:
+                    CitizenController.listAll();
+                    break;
+            }
+        }
+    }
 }

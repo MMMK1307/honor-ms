@@ -16,4 +16,30 @@ public class CitizenController {
     public static ArrayList<Citizen> getByName(String name) {
         return citizenRepo.getBy((c) -> c.getName().contains(name));
     }
+
+    public static void listAll() {
+        var citizens = citizenRepo.getAll();
+
+        if(citizens == null) {
+            System.out.println("No citizens found.");
+            return;
+        }
+
+        CitizenView.getBy(citizens);
+    }
+
+    public static void createCitizen() {
+        Citizen citizen = CitizenView.create();
+        boolean success = citizenRepo.save(citizen);
+
+        if(success) {
+            System.out.println("Citizen created successfully!");
+        } else {
+            System.out.println("Failed to create citizen.");
+        }
+    }
+
+    public static void menu() {
+        CitizenView.menu();
+    }
 }
