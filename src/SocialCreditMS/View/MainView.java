@@ -77,6 +77,7 @@ public class MainView {
                     break;
                 case 3:
                     DelationView.menu();
+                    break;
                 case 8:
                     EmperorRequisitionController.menu();
                     break;

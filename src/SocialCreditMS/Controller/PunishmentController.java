@@ -1,6 +1,7 @@
 package SocialCreditMS.Controller;
 
 import SocialCreditMS.Model.Punishment;
+import SocialCreditMS.View.PunishmentView;
 import SocialCreditMS.db.PunishmentRepository;
 
 import java.util.ArrayList;

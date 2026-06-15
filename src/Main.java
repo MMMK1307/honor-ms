@@ -30,13 +30,6 @@ public class Main {
             User basicUser = User.create("Basic", "basic", "basic", UserAccess.Basic);
             userRepo.save(basicUser);
         }
-
-        CitizenRepository citizenRepo = new CitizenRepository();
-        var citizens = citizenRepo.getBy(u -> u.getName().equals("basic"));
-        if(citizens.isEmpty()) {
-            var citizen = Citizen.create("basic");
-            citizenRepo.save(citizen);
-        }
     }
 
     public static void main(String[] args) {
